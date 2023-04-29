@@ -1,0 +1,37 @@
+*{
+    font-family: 'montserrat', sans-serif;
+}
+
+body{
+    background-color: black;
+}
+
+#deviceValidation{
+    background-color: rgb(45, 45, 45);
+    border: 5px solid rgb(69, 69, 69);
+    color:white;
+    border-radius: 10px;
+    height: 75px;
+    width: 700px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -moz-transform: translateX(-50%) translateY(-50%);
+    -webkit-transform: translateX(-50%) translateY(-50%);
+    transform: translateX(-50%) translateY(-50%);
+    font-size: 100px;
+    outline: none;
+}
+
+#deviceValidationtxt{
+    color:white;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -moz-transform: translateX(-50%) translateY(-50%);
+    -webkit-transform: translateX(-50%) translateY(-50%);
+    transform: translateX(-50%) translateY(-50%);
+    font-size: 20px;
+    outline: none;
+    margin-top: 60px;
+}
