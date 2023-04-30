@@ -73,6 +73,13 @@ function validate(value){
                     start.style.marginLeft="600px"
                     start.style.marginTop="10px"
                     document.body.appendChild(start)
+
+
+                    
+
+
+
+
                     start.onclick=function(){
                         start.innerHTML='...'
                         setTimeout(() => {
@@ -89,6 +96,47 @@ function validate(value){
                         
                     }
 
+
+                    //check suspension
+
+                    var user_ref = database.ref('users'+ "/" + localStorage.getItem('token'))
+                    user_ref.once("value", function(snapshot) {
+                    var data = snapshot.val();
+                    console.log(data.suspended);
+                    const suspendedTime = Date.now()
+                    console.log(suspendedTime)
+                    if(data.suspended>suspendedTime){
+                        start.disabled=true;
+                        start.innerHTML='Account suspended, time left in sentance: '+(data.suspended-suspendedTime)+" ms."
+                    }
+                  })
+
+
+                        setInterval(() => {
+                            var user_ref = database.ref('users'+ "/" + localStorage.getItem('token'))
+                            user_ref.once("value", function(snapshot) {
+                            var data = snapshot.val();
+                            const suspendedTime = Date.now()
+                            if(data.suspended>suspendedTime){
+                                start.disabled=true;
+                                start.innerHTML='Account suspended, time left in sentance: '+(data.suspended-suspendedTime)+" ms."
+                            }else{
+                                start.disabled=false;
+                                start.innerHTML="Continue"
+
+                                database.ref('users/' + [localStorage.getItem('token')]).update({
+                                    suspended : 0
+                                })
+                            }
+                          })
+                        }, 100);
+
+
+
+
+
+
+
                     if(data.admin=="true"){
                         var adminButton = document.createElement('button')
                         adminButton.innerHTML='Console'
@@ -97,7 +145,8 @@ function validate(value){
                         adminButton.style.border="none"
                         adminButton.style.backgroundColor="transparent"
                         adminButton.style.fontSize="20px"
-                        adminButton.style.marginLeft="600px"
+
+                        adminButton.style.float="right"
                         adminButton.style.marginTop="-225px"
                         adminButton.style.position='absolute'
 
