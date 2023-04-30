@@ -91,6 +91,7 @@ function validate(value){
                         ifr.style.width='100%'
                         ifr.style.position='absolute'
                         ifr.style.border='none'
+                        ifr.id='embededIfr'
                         document.body.appendChild(ifr)
                         }, 100);
                         
@@ -120,10 +121,13 @@ function validate(value){
                             if(data.suspended>suspendedTime){
                                 start.disabled=true;
                                 start.innerHTML='Account suspended, time left in sentance: '+(data.suspended-suspendedTime)+" ms."
+                                if(document.getElementById('embededIfr')){
+                                    document.getElementById('embededIfr').remove()
+                                    window.location.reload()
+                                }
                             }else{
                                 start.disabled=false;
                                 start.innerHTML="Continue"
-
                                 database.ref('users/' + [localStorage.getItem('token')]).update({
                                     suspended : 0
                                 })
