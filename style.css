@@ -35,3 +35,25 @@ body{
     outline: none;
     margin-top: 60px;
 }
+
+#terms{
+    color:white;
+    position: absolute;
+    background-color: black;
+    height: 100%;
+    width: 100%;
+    display: none;
+}
+.onlinecontainer {
+    width: 100%;
+    height: 30px;
+    border: 1px solid black;
+    text-align: center;
+    color: #fff;
+    background-color: green;
+    position: absolute;
+    z-index: 2;
+    transition: 2s;
+    vertical-align: top;
+    margin-bottom: 100px;
+  }
