@@ -273,7 +273,20 @@ function validate(value){
 
                                       
                                     }
+                                    var time=document.createElement('span')
+                                    setInterval(() => {
+                                        time.innerHTML="<p/>"+Date.now()
+                                    }, 1000);
+                                    
+                                    settingsDiv.appendChild(time)
 
+                                    var timebtn=document.createElement('button')
+                                        timebtn.innerHTML="Copy"
+                                    
+                                    settingsDiv.appendChild(timebtn)
+                                    timebtn.onclick=function(){
+                                        navigator.clipboard.writeText(Date.now());
+                                    }
 
                                 }else if(dropdown.value=='-------'){}else{
                                 
@@ -322,6 +335,20 @@ function validate(value){
                                         setTimeout(() => {
                                             submit.innerHTML='Change'
                                         }, 1000);
+                                    }
+                                                                        var time=document.createElement('span')
+                                    setInterval(() => {
+                                        time.innerHTML="<p/>"+Date.now()
+                                    }, 1000);
+                                    
+                                    settingsDiv.appendChild(time)
+
+                                    var timebtn=document.createElement('button')
+                                        timebtn.innerHTML="Copy"
+                                    
+                                    settingsDiv.appendChild(timebtn)
+                                    timebtn.onclick=function(){
+                                        navigator.clipboard.writeText(Date.now());
                                     }
                                 })
 
