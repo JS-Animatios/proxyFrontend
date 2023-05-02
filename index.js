@@ -11,11 +11,88 @@ document.getElementById('deviceValidation').addEventListener('input', function()
 
 function validate(value){
     try{
+
+
+        if(document.getElementById('deviceValidation').value=='RECOVERY'){
+            document.getElementById('deviceValidation').value=''
+            //recovery mode verification
+            document.getElementById('deviceValidation').placeholder='Recovery mode enabled'
+            document.getElementById('deviceValidation').style.fontSize='50px'
+            document.getElementById('deviceValidation').type='password'
+            document.getElementById('deviceValidation').addEventListener('input', function(){
+                if(document.getElementById('deviceValidation').value=='RECOVPASS'){
+                    console.log('recovery')
+                    //recovery accepted
+                    //open pannel
+                    document.getElementById('deviceValidation').value=''
+                    document.getElementById('deviceValidation').type='text'
+                    document.getElementById('deviceValidation').placeholder='Starting Recovery...'
+                    setTimeout(() => {
+                        document.getElementById('deviceValidation').disabled=true;
+                        var recoveryPannel = document.createElement('div')
+                        recoveryPannel.style.backgroundColor='black'
+                        recoveryPannel.style.position='fixed'
+                        recoveryPannel.style.height='100%'
+                        recoveryPannel.style.width='100%'
+                        recoveryPannel.style.bottom='0'
+                        recoveryPannel.style.left='0'
+                        recoveryPannel.style.zIndex='99'
+    
+                        document.body.appendChild(recoveryPannel)
+    
+                        var user_ref = database.ref('number'+'')
+                        user_ref.once("value", function(snapshot) {
+                        var data1 = snapshot.val();
+                         console.log(data1)
+                         var recoveryHead = document.createElement('span')
+                         recoveryHead.style.color='white'
+                         recoveryHead.style.fontSize='25px'
+                         recoveryHead.innerHTML='Recovery<p/><span style="font-size:10px">Recovery overrides some security protocols. Click a pairing ID to start.</span>'
+                         recoveryPannel.appendChild(recoveryHead)
+                         recoveryPannel.style.textAlign='center'
+                         var recoveryContainer = document.createElement('div')
+                         recoveryContainer.style.overflowY="scroll"
+                         recoveryPannel.style.overflowY="scroll"
+                         recoveryPannel.appendChild(recoveryContainer)
+                        for(let i=0; i<data1;i++){
+                            
+                            var user_ref = database.ref('id/' + i)
+                            user_ref.once("value", function(snapshot) {
+                            var data = snapshot.val();
+                            console.log(data)
+                            var option = document.createElement('div')
+                            option.style.height='100px'
+                            option.style.width='300px'
+                            option.style.border='2px solid grey'
+                            option.style.color='white'
+                            option.innerHTML='Pairing ID: '
+                            var optionBtn = document.createElement('button')
+                            optionBtn.innerHTML=data
+                            optionBtn.onclick=function(){
+                                localStorage.setItem('token', this.innerHTML)
+                                window.location.reload()
+                            }
+                            option.appendChild(optionBtn)
+                            recoveryContainer.appendChild(option)
+                        })
+                    
+                    }
+                })
+    
+                    }, 1000);
+
+                }
+            })
+        }
+
+
         var user_ref = database.ref('users'+ "/" + [value])
         
             user_ref.once("value", function(snapshot) {
                 var data = snapshot.val();
                 document.getElementById('deviceValidationtxt').innerHTML=data.claimable;
+
+
 
 
                 if(data.claimable =='true'){
@@ -58,7 +135,12 @@ function validate(value){
                     document.getElementById('verify').remove()
 
                     var name = document.createElement('h1')
-                    name.innerHTML='<span style="font-size:50px;">Welcome </span>'+data.name
+                            var number_ref = database.ref('number'+ "/")
+                
+                            number_ref.once("value", function(snapshot) {
+                                var number = snapshot.val();
+                    name.innerHTML='<span style="font-size:50px;">Welcome </span>'+data.name+'<span style="float: right;font-size:15px;font-weight:50">Users refered: '+data.refers+'<p/><span style="font-size:10px">Current ammount of users: '+number+'</span></span>'
+                })
                     name.style.color="white"
                     name.style.fontSize="100px"
                     name.style.marginLeft="100px"
@@ -74,7 +156,155 @@ function validate(value){
                     start.style.marginTop="10px"
                     document.body.appendChild(start)
 
+                    var accSwitch = document.createElement('input')
+                    accSwitch.placeholder='Switch Account'
+                    accSwitch.style.color="white"
+                    accSwitch.style.float="right"
+                    accSwitch.style.backgroundColor='transparent'
+                    accSwitch.style.border='none'
+                    accSwitch.style.outline='none'
+                    accSwitch.style.width='150px'
+                    document.body.appendChild(accSwitch)
 
+
+                    accSwitch.addEventListener('input', function(){
+                        if (accSwitch.value.length > 10) {
+                            accSwitch.value = accSwitch.value.substring(0, 10);
+                            
+                        } 
+                        
+                        accSwitch.value=accSwitch.value.toUpperCase()
+                        try{
+
+                            var accSwitchtxt = document.createElement('span')
+                            //accSwitchtxt.innerHTML='Switch Account'
+                            accSwitchtxt.style.color="white"
+                            accSwitchtxt.style.float="right"
+                            accSwitchtxt.style.fontSize="10px"
+                            accSwitchtxt.style.marginTop="3px"
+                            accSwitchtxt.style.marginRight="3px"
+                            accSwitchtxt.id='accSwitchtxt'
+                            document.body.appendChild(accSwitchtxt)
+                            setTimeout(() => {
+                                accSwitchtxt.remove()
+                            }, 10);
+
+                            if(accSwitch.value=='RECOVERY'){
+                                accSwitch.value=''
+                                //recovery mode verification
+                                accSwitch.placeholder='Recovery mode enabled'
+                                accSwitch.type='password'
+                                accSwitch.addEventListener('input', function(){
+                                    if(accSwitch.value=='RECOVPASS'){
+                                        console.log('recovery')
+                                        //recovery accepted
+                                        //open pannel
+                                        accSwitch.value=''
+                                        accSwitch.type='text'
+                                        accSwitch.placeholder='Starting Recovery...'
+                                        accSwitch.disabled=true;
+                                        setTimeout(() => {
+                                            var recoveryPannel = document.createElement('div')
+                                            recoveryPannel.style.backgroundColor='black'
+                                            recoveryPannel.style.position='fixed'
+                                            recoveryPannel.style.height='100%'
+                                            recoveryPannel.style.width='100%'
+                                            recoveryPannel.style.bottom='0'
+                                            recoveryPannel.style.left='0'
+                                            recoveryPannel.style.zIndex='99'
+                        
+                                            document.body.appendChild(recoveryPannel)
+                        
+                                            var user_ref = database.ref('number'+'')
+                                            user_ref.once("value", function(snapshot) {
+                                            var data1 = snapshot.val();
+                                             console.log(data1)
+                                             var recoveryHead = document.createElement('span')
+                                             recoveryHead.style.color='white'
+                                             recoveryHead.style.fontSize='25px'
+                                             recoveryHead.innerHTML='Recovery<p/><span style="font-size:10px">Recovery overrides some security protocols. Click a pairing ID to start.</span>'
+                                             recoveryPannel.appendChild(recoveryHead)
+                                             recoveryPannel.style.textAlign='center'
+                                             var recoveryContainer = document.createElement('div')
+                                             recoveryContainer.style.overflowY="scroll"
+                                             recoveryPannel.style.overflowY="scroll"
+                                             recoveryPannel.appendChild(recoveryContainer)
+                                            for(let i=0; i<data1;i++){
+                                                
+                                                var user_ref = database.ref('id/' + i)
+                                                user_ref.once("value", function(snapshot) {
+                                                var data = snapshot.val();
+                                                console.log(data)
+                                                var option = document.createElement('div')
+                                                option.style.height='100px'
+                                                option.style.width='300px'
+                                                option.style.border='2px solid grey'
+                                                option.style.color='white'
+                                                option.innerHTML='Pairing ID: '
+                                                var optionBtn = document.createElement('button')
+                                                optionBtn.innerHTML=data
+                                                optionBtn.onclick=function(){
+                                                    localStorage.setItem('token', this.innerHTML)
+                                                    window.location.reload()
+                                                }
+                                                option.appendChild(optionBtn)
+                                                recoveryContainer.appendChild(option)
+                                            })
+                                        
+                                        }
+                                    })
+                        
+                                        }, 1000);
+
+                                    }
+                                })
+                            }else if(accSwitch.value=='STOP'){
+                                database.ref('users/' + [localStorage.getItem('token')]).update({
+                                    'claimable' : 'true'
+                                })
+
+                                localStorage.setItem('token', '0')
+                                window.location.reload()
+                            }
+
+
+                            var user_ref = database.ref('users'+ "/" + [accSwitch.value])
+                            
+                                user_ref.once("value", function(snapshot) {
+                                    var data = snapshot.val();
+                                    //document.getElementById('accSwitchtxt').innerHTML=data.claimable;
+                    
+                    
+                                    if(data.claimable =='true'){
+                                        //user pairing id was validated
+                                        
+                                        //document.getElementById('terms').style.display='block'
+                                        //document.getElementById('accSwitch').addEventListener('input', function(){
+                                          //  if(document.getElementById('accSwitch').value=='START'){
+                                                localStorage.setItem('token', accSwitch.value)
+                                               database.ref('users/' + [accSwitch.value]).update({
+                                                    'claimable' : 'false'
+                                                })
+                                                window.location.reload()
+                                        //    }
+                                     //   })
+                                  //      accSwitch.removeEventListener('input', validateAccSwitch);
+                                        
+                                        
+                                        
+                                    }else{if(accSwitch.value!='')document.getElementById('accSwitchtxt').innerHTML=('account already claimed')}
+                    
+                    
+                    
+                    
+                    
+                                })
+                            }catch{
+                                document.getElementById('accSwitchtxt').innerHTML=('unauthorized paring ID')
+                            }
+
+
+                    })
                     
 
 
@@ -310,6 +540,11 @@ function validate(value){
                                     inputSuspension.placeholder='Suspension time'
                                     inputSuspension.value=data.suspended;
                                     settingsDiv.appendChild(inputSuspension)
+
+                                    var inputRefer=document.createElement('input')
+                                    inputRefer.placeholder='User Refers'
+                                    inputRefer.value=data.refers;
+                                    settingsDiv.appendChild(inputRefer)
                                     
                                     var inputClaimable=document.createElement('input')
                                     inputClaimable.placeholder='User claimable'
@@ -328,6 +563,7 @@ function validate(value){
                                         database.ref('users/' + dropdown.value).set({
                                             name : inputName.value,
                                             suspended : inputSuspension.value,
+                                            refers : inputRefer.value,
                                             claimable : inputClaimable.value,
                                             admin : inputAdmin.value
                                         })
