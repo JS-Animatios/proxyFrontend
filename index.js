@@ -338,7 +338,7 @@ function validate(value){
                     console.log(suspendedTime)
                     if(data.suspended>suspendedTime){
                         start.disabled=true;
-                        start.innerHTML='Account suspended, time left in sentance: '+(data.suspended-suspendedTime)+" ms."
+                        start.innerHTML='Account suspended for '+data.suspendedReason+', time left in sentance: '+(data.suspended-suspendedTime)+" ms."
                     }
                   })
 
@@ -350,7 +350,7 @@ function validate(value){
                             const suspendedTime = Date.now()
                             if(data.suspended>suspendedTime){
                                 start.disabled=true;
-                                start.innerHTML='Account suspended, time left in sentance: '+(data.suspended-suspendedTime)+" ms."
+                                start.innerHTML='Account suspended for '+data.suspendedReason+', time left in sentance: '+(data.suspended-suspendedTime)+" ms."
                                 if(document.getElementById('embededIfr')){
                                     document.getElementById('embededIfr').remove()
                                     window.location.reload()
@@ -360,6 +360,9 @@ function validate(value){
                                 start.innerHTML="Continue"
                                 database.ref('users/' + [localStorage.getItem('token')]).update({
                                     suspended : 0
+                                })
+                                database.ref('users/' + [localStorage.getItem('token')]).update({
+                                    suspendedReason : ''
                                 })
                             }
                           })
@@ -454,6 +457,15 @@ function validate(value){
                                     inputSuspension.placeholder='Suspension time'
                                     settingsDiv.appendChild(inputSuspension)
 
+                                    var inputSuspendedReason=document.createElement('input')
+                                    inputSuspendedReason.placeholder='User suspension reason'
+                                    inputSuspendedReason.value=data.suspendedReason;
+                                    settingsDiv.appendChild(inputSuspendedReason)
+
+                                    var inputRefer=document.createElement('input')
+                                    inputRefer.placeholder='User Refers'
+                                    settingsDiv.appendChild(inputRefer)
+
                                     var inputID=document.createElement('input')
                                     inputID.placeholder='User Pairing ID'
                                     settingsDiv.appendChild(inputID)
@@ -474,6 +486,8 @@ function validate(value){
                                         database.ref('users/' + inputID.value).set({
                                             name : inputName.value,
                                             suspended : inputSuspension.value,
+                                            suspendedReason : inputSuspendedReason.value,
+                                            refers : inputRefer.value,
                                             claimable : inputClaimable.value,
                                             admin : inputAdmin.value
 
@@ -541,6 +555,11 @@ function validate(value){
                                     inputSuspension.value=data.suspended;
                                     settingsDiv.appendChild(inputSuspension)
 
+                                    var inputSuspendedReason=document.createElement('input')
+                                    inputSuspendedReason.placeholder='User suspension reason'
+                                    inputSuspendedReason.value=data.suspensionReason;
+                                    settingsDiv.appendChild(inputSuspendedReason)
+
                                     var inputRefer=document.createElement('input')
                                     inputRefer.placeholder='User Refers'
                                     inputRefer.value=data.refers;
@@ -563,6 +582,7 @@ function validate(value){
                                         database.ref('users/' + dropdown.value).set({
                                             name : inputName.value,
                                             suspended : inputSuspension.value,
+                                            suspendedReason : inputSuspendedReason.value,
                                             refers : inputRefer.value,
                                             claimable : inputClaimable.value,
                                             admin : inputAdmin.value
