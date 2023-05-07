@@ -1,0 +1,223 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: arial, sans-serif;
+}
+a{
+    color: rgba(0,0,0,.87);
+    text-decoration: none;
+    font-size: 13px;
+    padding: 0 6px 0 5px;
+}
+a:hover{
+    text-decoration: underline;
+}
+ul{
+    list-style: none;
+}
+img{
+    max-width: 100%;
+    max-height: 100%;
+}
+header, header ul{
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 4px 6px;
+    gap: 6px;
+}
+.header-img{
+    width: 44px;
+    height: 44px;
+    cursor: pointer;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: .2s;
+}
+.header-img:hover{
+    background-color: #eee;
+}
+.dots{
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+}
+.profile{
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+}
+main{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    min-height: 68vh;
+}
+.google{
+    width: 275px;
+}
+.inp-cont{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 44px;
+    width: 90%;
+    max-width: 585px;
+    border: 1px solid #e1e1e1;
+    border-radius: 26px;
+    padding: 0 6px;
+}
+.inp-cont:hover{
+    box-shadow: 0 0 10px -5px #777;
+}
+input{
+    width: 100%;
+    height: 34px;
+    border: none;
+    outline: none;
+    font-size: 14px;
+}
+.search-icon, .mic-icon{
+    height: 34px;
+    padding: 6px;
+}
+.mic-icon{
+    cursor: pointer;
+}
+button{
+    padding: 0px 16px;
+    line-height: 27px;
+    height: 36px;
+    cursor: pointer;
+    background-color: #f8f9fa;
+    border: 1px solid #f8f9fa;
+    border-radius: 4px;
+    font-size: 14px;
+    margin: 11px 4px;
+    min-width: 54px;
+    text-align: center;
+}
+button:hover{
+    box-shadow: 0 0 3px -1px #777;
+}
+button:focus{
+    box-shadow: none;
+    border-color: rgb(66,133,244);
+}
+.lang{
+    font-size: small;
+}
+.lang a{
+    font-size: small;
+    color: #1a0dab;
+}
+
+footer{
+    background-color: #f2f2f2;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+}
+footer *{
+    color: #70757a;
+    font-size: 14px;
+}
+.footer-1{
+    padding: 15px 30px;
+    border-bottom: 1px solid #dadce0;
+}
+.footer-2{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    padding: 0 20px;
+}
+.footer-2 a{
+    padding: 15px 13px;
+    display: inline-block;
+}
+.ytad{
+    color:Tomato;
+}
+.secretbox{
+    position:fixed;
+    padding:0;
+    margin:0;
+
+    top:0;
+    left:0;
+
+    width: 100%;
+    height: 100%;
+    background:white;
+}
+
+.backbutton{
+    vertical-align: top;
+    z-index: 50;
+}
+.riddles{
+    z-index: 20;
+    display: inline-block;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 300px;
+    height: 200px;
+    margin: auto;
+    background-color: #fafafa;
+    border-radius: 5%;
+    opacity: 100%;
+    border-bottom: 20px;
+    
+}
+.riddlesback{
+    line-height: 12px;
+     width: 18px;
+     font-size: 8pt;
+     font-family: tahoma;
+     margin-top: 1px;
+     margin-right: 2px;
+     position:absolute;
+     top:0;
+     right:0;
+    background-color: transparent;
+    border-color: transparent;
+    margin-top: 5px;
+    margin-right: 5px;
+    font-size: 30px;
+    color: rgba(119, 119, 119, 0.743);
+    
+
+}
+.riddlehead{
+    text-align: center;
+    margin-top: 15px;
+    
+    
+    
+}
+
+.riddletxt{
+    text-align: center;
+    margin-top: 30px;
+}
+@media only screen and (min-width: 1200px){
+    .footer-2{
+        justify-content: space-between;
+    }
+}
+@media only screen and (min-width: 700px){
+    .footer-2{
+        flex-direction: row;
+    }
+}

@@ -1,39 +1,61 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
+<html lang="en"><head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Google</title>
+    <link rel="stylesheet" href="main.css">
     <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-database.js"></script>
 </head>
 <body>
-    
-    <div id="onlinecontainer" class="onlinecontainer" style="bottom: 700px;">
-        <span id="statspan"></span>
-    </div>
-    <div id="terms">
+    <div id="deleteWhenDone">
+    <header>
+        <ul>
+            <li>
+                <a href="#" onclick="gmailclick();">Gmail</a>
+            </li>
+            <li>
+                <a href="#">Images</a>
+            </li>
+            <li class="header-img">
+                <img class="dots" onclick="waffleclick();" src="img/dots.png" alt="">
+            </li>
+            <li class="header-img">
+                <img class="profile" onclick="profilepicclick();"src="img/profile.jpg" alt="">
+            </li>
+        </ul>
+    </header>
+    <main>
+        <img src="img/google.png" class="google">
+        <div class="inp-cont">
+            <img src="img/search.png" class="search-icon">
+            <input type="text" id="textbox">
+            <img onclick="micclick();" src="img/mic.png" class="mic-icon">
+        </div>
+        <div class="btn-cont">
+            <button>Google Search</button>
+            <button onclick="luckyclick();" id="lucky">I'm Feeling Lucky</button>
+        </div>
 
-        <h1>Terms and Conditions</h1>
-        <h3>By clicking continue, you agree to the terms and conditions.</h3>
-        <h5>Your access to this website can be revoked at any point in time<p></p>for no reason. You will be held responsable for<p> all your actions on this website. Use this at your own risk. </p></p>Type start to continue</h5>
+    </main>
+    <footer>
+        
+        <div class="footer-2">
+            <div>
+                <a herf="#" id="about" onclick="aboutclick()">About</a>
+                <a href="#" onclick="adsclick()">Advertising</a>
+                <a onclick="enable()">Business</a>
+                <a href="#">How Search works</a>
+            </div>
+            <div>
+                <a href="#">Privacy</a>
+                <a onclick="termsclick();" href="#">Terms</a>
+                <a href="#">Settings</a>
+            </div>
+        </div>
 
-    </div>
-<div id="verify">
-    <h1 style="color:white;margin-top:100px;margin-left:150px">Pair your device with an account</h1>
-    <h3 style="color:white;margin-top:25px;margin-left:250px">Verify your identity by pairing an account with your device</h3>
-    <input id="deviceValidation">
-    <span id="deviceValidationtxt"></span>
-</div>
-
-</body>
-
-
-<script src="firebase.js"></script>
-<script src="universalcommands.js"></script>
-<script src="index.js"></script>
-<script src="online.js"></script>
-</html>
+    </footer></div>
+    <script src="universalcommands.js"></script>
+    <script src="main.js"></script>
+</body></html>
